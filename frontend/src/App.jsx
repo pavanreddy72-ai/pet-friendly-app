@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import api from "./api";
+import Dashboard from "./components/Dashboard.jsx";
 import "./App.css";
 
 const initialForm = {
@@ -24,8 +25,15 @@ function getErrorMessage(error) {
   if (typeof data === "object") {
     return Object.entries(data)
       .map(([field, messages]) => {
-        const text = Array.isArray(messages) ? messages.join(" ") : String(messages);
-        return `${field === "non_field_errors" ? "Error" : field.replaceAll("_", " ")}: ${text}`;
+        const text = Array.isArray(messages)
+          ? messages.join(" ")
+          : String(messages);
+
+        return `${
+          field === "non_field_errors"
+            ? "Error"
+            : field.replaceAll("_", " ")
+        }: ${text}`;
       })
       .join(" ");
   }
@@ -39,9 +47,11 @@ function App() {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+
   const [userEmail, setUserEmail] = useState(
     () => sessionStorage.getItem("petUserEmail") || "",
   );
+
   const [accessToken, setAccessToken] = useState(
     () => sessionStorage.getItem("petAccessToken") || "",
   );
@@ -51,7 +61,12 @@ function App() {
 
   function handleChange(event) {
     const { name, value } = event.target;
-    setForm((previous) => ({ ...previous, [name]: value }));
+
+    setForm((previous) => ({
+      ...previous,
+      [name]: value,
+    }));
+
     setError("");
     setMessage("");
   }
@@ -81,29 +96,34 @@ function App() {
     setLoading(true);
 
     try {
+      const email = form.email.trim().toLowerCase();
+
       if (isRegister) {
         await api.post("/auth/register/", {
-          email: form.email.trim().toLowerCase(),
+          email,
           password: form.password,
           first_name: form.first_name.trim(),
           last_name: form.last_name.trim(),
         });
 
         setMessage("Account created successfully. You can now log in.");
-        setForm({ ...initialForm, email: form.email.trim().toLowerCase() });
+        setForm({
+          ...initialForm,
+          email,
+        });
         setMode("login");
       } else {
         const response = await api.post("/auth/login/", {
-          email: form.email.trim().toLowerCase(),
+          email,
           password: form.password,
         });
 
         sessionStorage.setItem("petAccessToken", response.data.access);
         sessionStorage.setItem("petRefreshToken", response.data.refresh);
-        sessionStorage.setItem("petUserEmail", form.email.trim().toLowerCase());
+        sessionStorage.setItem("petUserEmail", email);
 
         setAccessToken(response.data.access);
-        setUserEmail(form.email.trim().toLowerCase());
+        setUserEmail(email);
         setForm(initialForm);
       }
     } catch (requestError) {
@@ -117,38 +137,21 @@ function App() {
     sessionStorage.removeItem("petAccessToken");
     sessionStorage.removeItem("petRefreshToken");
     sessionStorage.removeItem("petUserEmail");
+
     setAccessToken("");
     setUserEmail("");
     setForm(initialForm);
+    setError("");
     setMessage("You have logged out.");
     setMode("login");
   }
 
   if (isSignedIn) {
     return (
-      <main className="pet-app">
-        <header className="topbar">
-          <a className="brand" href="#home" aria-label="PetFriendly home">
-            <span className="brand-icon" aria-hidden="true">🐾</span>
-            <span>pet<span className="brand-accent">friendly</span></span>
-          </a>
-          <button className="button button-outline logout-button" onClick={handleLogout}>
-            Log out
-          </button>
-        </header>
-
-        <section className="welcome-panel" id="home">
-          <span className="eyebrow">YOUR PET JOURNEY STARTS HERE</span>
-          <div className="welcome-emoji" aria-hidden="true">🐕 🐈</div>
-          <h1>Welcome to your happy place.</h1>
-          <p>You’re signed in as <strong>{userEmail}</strong>.</p>
-          <p className="muted">
-            Your pet dashboard is our next step. Soon you’ll be able to manage
-            pet profiles, discover care guides, explore adoption, and find pet-friendly places.
-          </p>
-          {message && <p className="success-message" role="status">{message}</p>}
-        </section>
-      </main>
+      <Dashboard
+        email={userEmail}
+        onLogout={handleLogout}
+      />
     );
   }
 
@@ -157,21 +160,31 @@ function App() {
       <header className="topbar">
         <a className="brand" href="#home" aria-label="PetFriendly home">
           <span className="brand-icon" aria-hidden="true">🐾</span>
-          <span>pet<span className="brand-accent">friendly</span></span>
+          <span>
+            pet<span className="brand-accent">friendly</span>
+          </span>
         </a>
+
         <div className="topbar-note">A happier life for every pet</div>
       </header>
 
       <section className="auth-layout">
         <div className="hero-panel">
           <span className="eyebrow">MORE LOVE. MORE WAGGING. MORE LIFE.</span>
-          <h1>Every pet deserves a little more <span>love.</span></h1>
+
+          <h1>
+            Every pet deserves a little more <span>love.</span>
+          </h1>
+
           <p>
             Your companion for pet care, adoption, trusted services, and
             everyday moments with the animals you love.
           </p>
 
-          <div className="pet-illustration" aria-label="Illustrations of a dog, cat, and rabbit">
+          <div
+            className="pet-illustration"
+            aria-label="Illustrations of a dog, cat, and rabbit"
+          >
             <span className="pet-bubble bubble-one">🐶</span>
             <span className="pet-bubble bubble-two">🐱</span>
             <span className="pet-bubble bubble-three">🐰</span>
@@ -188,8 +201,14 @@ function App() {
 
         <div className="auth-panel">
           <div className="auth-heading">
-            <span className="eyebrow">{isRegister ? "JOIN OUR PET COMMUNITY" : "WELCOME BACK"}</span>
-            <h2>{isRegister ? "Create your account" : "Let’s get you home."}</h2>
+            <span className="eyebrow">
+              {isRegister ? "JOIN OUR PET COMMUNITY" : "WELCOME BACK"}
+            </span>
+
+            <h2>
+              {isRegister ? "Create your account" : "Let’s get you home."}
+            </h2>
+
             <p>
               {isRegister
                 ? "Create an account to begin your pet-friendly journey."
@@ -207,6 +226,7 @@ function App() {
             >
               Log in
             </button>
+
             <button
               type="button"
               role="tab"
@@ -218,8 +238,17 @@ function App() {
             </button>
           </div>
 
-          {error && <div className="form-message error-message" role="alert">{error}</div>}
-          {message && <div className="form-message success-message" role="status">{message}</div>}
+          {error && (
+            <div className="form-message error-message" role="alert">
+              {error}
+            </div>
+          )}
+
+          {message && (
+            <div className="form-message success-message" role="status">
+              {message}
+            </div>
+          )}
 
           <form className="auth-form" onSubmit={handleSubmit}>
             {isRegister && (
@@ -236,6 +265,7 @@ function App() {
                     placeholder="Your first name"
                   />
                 </label>
+
                 <label>
                   Last name
                   <input
@@ -273,23 +303,31 @@ function App() {
                 value={form.password}
                 onChange={handleChange}
                 autoComplete={isRegister ? "new-password" : "current-password"}
-                placeholder={isRegister ? "Create a strong password" : "Enter your password"}
+                placeholder={
+                  isRegister ? "Create a strong password" : "Enter your password"
+                }
                 required
               />
             </label>
 
             {isRegister && (
               <p className="field-hint">
-                Use a strong password. Your password is never displayed in your account details.
+                Use a strong password. Your password is never displayed in
+                your account details.
               </p>
             )}
 
-            <button className="button button-primary submit-button" type="submit" disabled={loading}>
+            <button
+              className="button button-primary submit-button"
+              type="submit"
+              disabled={loading}
+            >
               {loading
                 ? "Please wait…"
                 : isRegister
                   ? "Create account"
                   : "Log in"}
+
               {!loading && <span aria-hidden="true">→</span>}
             </button>
           </form>
@@ -306,13 +344,15 @@ function App() {
           </p>
 
           <p className="privacy-note">
-            By continuing, you agree to use the platform responsibly and protect your account details.
+            By continuing, you agree to use the platform responsibly and
+            protect your account details.
           </p>
         </div>
       </section>
 
       <footer className="site-footer">
-        Made for every paw, wing, fin, and little friend. <span aria-hidden="true">♥</span>
+        Made for every paw, wing, fin, and little friend.{" "}
+        <span aria-hidden="true">♥</span>
       </footer>
     </main>
   );
