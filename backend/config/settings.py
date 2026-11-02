@@ -35,7 +35,16 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt.token_blacklist",
     "accounts",
+    "catalogue",
     "common",
+    "health",
+    "listings",
+    "pet_service",
+    "pets",
+    "places",
+    "products",
+    "vets",
+
 ]
 
 MIDDLEWARE = [
@@ -151,3 +160,7 @@ if not DEBUG:
     X_FRAME_OPTIONS = "DENY"
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
+    
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+PET_SERVICE_GST_RATE = "18"
