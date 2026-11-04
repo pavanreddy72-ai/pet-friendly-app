@@ -1,0 +1,393 @@
+
+/* ========================================
+   PETFRIENDLY - VETS & PLACES DIRECTORY
+======================================== */
+
+.directory-page {
+  --dir-green: #315b45;
+  --dir-dark: #26392f;
+  --dir-muted: #758078;
+  --dir-border: #e5eae3;
+  --dir-light: #f3f6ef;
+
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px 0 55px;
+  color: var(--dir-dark);
+  box-sizing: border-box;
+}
+
+.directory-page *,
+.directory-page *::before,
+.directory-page *::after {
+  box-sizing: border-box;
+}
+
+/* Page heading */
+
+.directory-heading {
+  margin-bottom: 28px;
+  padding: 38px 40px;
+  border: 1px solid #e8eee4;
+  border-radius: 22px;
+  background: linear-gradient(120deg, #edf5e9, #f8f4e9);
+}
+
+.directory-heading .eyebrow {
+  display: inline-block;
+  color: var(--dir-green);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.directory-heading h1 {
+  margin: 12px 0;
+  color: var(--dir-dark);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -1.2px;
+  line-height: 1.2;
+}
+
+.directory-heading p {
+  max-width: 650px;
+  margin: 0;
+  color: var(--dir-muted);
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+/* Search and filters */
+
+.directory-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin: 24px 0 28px;
+  padding: 20px;
+  border: 1px solid var(--dir-border);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 4px 15px rgb(38 57 47 / 3%);
+}
+
+.directory-filters > input:not([type="checkbox"]),
+.directory-filters > select {
+  flex: 1 1 190px;
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  padding: 11px 14px;
+  border: 1px solid #dfe7de;
+  border-radius: 11px;
+  outline: none;
+  background: #fff;
+  color: var(--dir-dark);
+  font: inherit;
+  font-size: 0.9rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.directory-filters > input:focus,
+.directory-filters > select:focus {
+  border-color: #779b80;
+  box-shadow: 0 0 0 3px rgb(91 132 99 / 12%);
+}
+
+.directory-filters label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  color: #536258;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.directory-filters input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--dir-green);
+  cursor: pointer;
+}
+
+/* Results grid */
+
+.directory-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  width: 100%;
+}
+
+/* Directory card */
+
+.directory-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 17px;
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid var(--dir-border);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 4px 15px rgb(38 57 47 / 4%);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.directory-card:hover {
+  transform: translateY(-3px);
+  border-color: #cbdaca;
+  box-shadow: 0 12px 28px rgb(38 57 47 / 9%);
+}
+
+/* Card icon */
+
+.directory-card-icon {
+  display: grid;
+  flex: 0 0 65px;
+  width: 65px;
+  height: 65px;
+  place-items: center;
+  border-radius: 17px;
+  background: #f2f3e9;
+  font-size: 2rem;
+}
+
+/* Card content */
+
+.directory-card-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.directory-card-content h3 {
+  margin: 0 0 11px;
+  color: var(--dir-dark);
+  font-size: 1.12rem;
+  font-weight: 800;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.directory-card-content > p {
+  margin: 7px 0;
+  color: var(--dir-muted);
+  font-size: 0.88rem;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+.directory-category {
+  display: inline-block;
+  margin-bottom: 9px;
+  padding: 5px 11px;
+  border-radius: 30px;
+  background: #edf4eb;
+  color: var(--dir-green);
+  font-size: 0.73rem;
+  font-weight: 750;
+}
+
+/* Service and amenity tags */
+
+.directory-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 14px 0;
+}
+
+.directory-tags span {
+  display: inline-block;
+  padding: 6px 10px;
+  border: 1px solid #e1e9df;
+  border-radius: 30px;
+  background: #f6f8f4;
+  color: #536c59;
+  font-size: 0.74rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* Pet policy */
+
+.directory-policy {
+  margin-top: 12px !important;
+  padding: 12px 14px;
+  border-left: 3px solid #83a889;
+  border-radius: 0 9px 9px 0;
+  background: #f4f7f1;
+  color: #536258 !important;
+  font-size: 0.84rem !important;
+}
+
+/* Card footer */
+
+.directory-card-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0;
+}
+
+.directory-card-footer span {
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: #edf5e9;
+  color: #315b45;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.directory-card-footer span:last-child {
+  background: #fff5e5;
+  color: #8a6329;
+}
+
+/* Buttons */
+
+.directory-card-content .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  margin-top: 10px;
+  padding: 10px 17px;
+  border: 1px solid var(--dir-green);
+  border-radius: 10px;
+  background: var(--dir-green);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.directory-card-content .button:hover {
+  transform: translateY(-1px);
+  background: #244832;
+}
+
+/* Loading, errors and empty results */
+
+.directory-page > p[role="alert"] {
+  padding: 15px;
+  border-radius: 11px;
+  background: #fff0ed;
+  color: #a13d32;
+}
+
+.directory-page > p {
+  color: var(--dir-muted);
+  line-height: 1.6;
+}
+
+/* Tablet */
+
+@media (max-width: 850px) {
+  .directory-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .directory-heading {
+    padding: 30px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 560px) {
+  .directory-page {
+    padding: 15px 0 35px;
+  }
+
+  .directory-heading {
+    margin-bottom: 20px;
+    padding: 25px 20px;
+    border-radius: 17px;
+  }
+
+  .directory-heading h1 {
+    font-size: 2rem;
+  }
+
+  .directory-heading p {
+    font-size: 0.88rem;
+  }
+
+  .directory-filters {
+    gap: 11px;
+    margin: 18px 0 22px;
+    padding: 15px;
+  }
+
+  .directory-filters > input:not([type="checkbox"]),
+  .directory-filters > select {
+    flex: 1 1 100%;
+    min-height: 46px;
+  }
+
+  .directory-filters label {
+    font-size: 0.82rem;
+  }
+
+  .directory-card {
+    gap: 12px;
+    padding: 15px;
+    border-radius: 14px;
+  }
+
+  .directory-card-icon {
+    flex-basis: 48px;
+    width: 48px;
+    height: 48px;
+    border-radius: 13px;
+    font-size: 1.55rem;
+  }
+
+  .directory-card-content h3 {
+    font-size: 1rem;
+  }
+
+  .directory-card-content > p {
+    font-size: 0.82rem;
+  }
+
+  .directory-tags span {
+    font-size: 0.7rem;
+  }
+}
+
+/* Small mobile */
+
+@media (max-width: 360px) {
+  .directory-card {
+    flex-direction: column;
+  }
+
+  .directory-card-icon {
+    width: 52px;
+    height: 52px;
+  }
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .directory-page *,
+  .directory-page *::before,
+  .directory-page *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

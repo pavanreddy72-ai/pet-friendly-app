@@ -164,3 +164,4 @@ if not DEBUG:
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 PET_SERVICE_GST_RATE = "18"
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")

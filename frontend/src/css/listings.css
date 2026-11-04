@@ -1,0 +1,278 @@
+
+.listings-page {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0 48px;
+  color: #263c30;
+}
+
+.listings-hero {
+  padding: clamp(24px, 5vw, 48px);
+  border-radius: 24px;
+  background: linear-gradient(135deg, #edf5e9, #f8f4e9);
+}
+
+.listings-hero h1 {
+  margin: 12px 0;
+  max-width: 650px;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 1.12;
+}
+
+.listings-hero p {
+  max-width: 650px;
+  line-height: 1.7;
+  color: #647469;
+}
+
+.listings-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 26px 0 20px;
+}
+
+.listing-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.listing-tabs button {
+  padding: 11px 18px;
+  border: 1px solid #dce6dc;
+  border-radius: 12px;
+  background: white;
+  color: #315b45;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 650;
+}
+
+.listing-tabs button.active {
+  background: #315b45;
+  border-color: #315b45;
+  color: white;
+}
+
+.listings-create-button {
+  min-height: 42px;
+}
+
+.listings-search {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 22px 0;
+}
+
+.listings-search input {
+  flex: 1;
+  min-width: 0;
+  padding: 13px 15px;
+  border: 1px solid #dce6dc;
+  border-radius: 12px;
+  background: white;
+  font: inherit;
+}
+
+.listings-search span {
+  white-space: nowrap;
+  color: #748078;
+  font-size: 0.9rem;
+}
+
+.listing-form {
+  display: grid;
+  gap: 16px;
+  margin: 22px 0;
+  padding: clamp(18px, 4vw, 28px);
+  border: 1px solid #dce6dc;
+  border-radius: 18px;
+  background: #fff;
+}
+
+.listing-form h2 {
+  margin: 0;
+}
+
+.listing-form-note {
+  margin: -8px 0 0;
+  color: #68786d;
+  font-size: 0.92rem;
+}
+
+.listing-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.listing-form label {
+  display: grid;
+  gap: 7px;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.listing-form input,
+.listing-form select,
+.listing-form textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #dce6dc;
+  border-radius: 10px;
+  background: white;
+  color: #263c30;
+  font: inherit;
+}
+
+.listing-form textarea {
+  resize: vertical;
+}
+
+.listings-notice,
+.listings-error {
+  padding: 12px 15px;
+  border-radius: 10px;
+  line-height: 1.5;
+}
+
+.listings-notice {
+  background: #edf7ed;
+  color: #245a36;
+}
+
+.listings-error {
+  background: #fff0ed;
+  color: #922f22;
+}
+
+.listings-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.listing-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #e2e9e2;
+  border-radius: 18px;
+  background: white;
+  box-shadow: 0 5px 18px rgb(30 60 40 / 5%);
+}
+
+.listing-image {
+  display: block;
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  background: #f0f3ed;
+}
+
+.listing-card-content {
+  display: grid;
+  gap: 10px;
+  padding: 18px;
+}
+
+.listing-card-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.listing-card-heading h2 {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-size: 1.2rem;
+}
+
+.listing-status {
+  padding: 4px 8px;
+  border-radius: 20px;
+  background: #edf5e9;
+  color: #315b45;
+  font-size: 0.78rem;
+  text-transform: capitalize;
+}
+
+.listing-breed,
+.listing-description,
+.listing-location {
+  margin: 0;
+  color: #68786d;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.listing-description {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.listing-price {
+  padding-top: 10px;
+  border-top: 1px solid #edf0eb;
+  color: #315b45;
+  font-weight: 750;
+}
+
+.listings-empty,
+.listings-state {
+  padding: 40px 18px;
+  text-align: center;
+  color: #68786d;
+}
+
+.listings-empty span {
+  font-size: 2.5rem;
+}
+
+.listings-empty h2 {
+  color: #263c30;
+}
+
+@media (max-width: 900px) {
+  .listings-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .listings-page {
+    padding-top: 12px;
+  }
+
+  .listings-grid,
+  .listing-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .listings-toolbar {
+    align-items: stretch;
+  }
+
+  .listing-tabs button {
+    padding: 10px 12px;
+  }
+
+  .listings-search {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .listing-image {
+    height: 220px;
+  }
+}

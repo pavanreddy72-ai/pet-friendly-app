@@ -1,8 +1,11 @@
 
 import { useState } from "react";
-import api from "./api";
+import api from "./api.js";
 import Dashboard from "./components/Dashboard.jsx";
-import "./App.css";
+import "./css/global.css";
+import "./css/auth.css";
+import "./css/dashboard.css";
+
 
 const initialForm = {
   email: "",
